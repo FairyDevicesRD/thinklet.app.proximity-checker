@@ -1,0 +1,38 @@
+name: Android CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17' # Change if necessary
+
+      - name: Enable Gradle cache
+        uses: gradle/actions/setup-gradle@v3
+
+      #- name: Verify Gradle Wrapper
+      #  run: ./gradlew wrapper --gradle-version 8.12.1
+
+      - name: Build project
+        run: ./gradlew assembleDebug
+
+      - name: Run Lint check
+        run: ./gradlew lintDebug
+
+      - name: Run Unit tests
+        run: ./gradlew testDebugUnitTest

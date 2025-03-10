@@ -1,0 +1,13 @@
+version: 2
+updates:
+  - package-ecosystem: "gradle"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    open-pull-requests-limit: 5
+    #ignore:
+    #  - dependency-name: "org.jetbrains.kotlin:kotlin-stdlib" # Kotlin の更新を無視したい場合
+    labels:
+      - "dependencies"
+    assignees:
+      - "emergent"
